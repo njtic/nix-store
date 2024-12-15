@@ -1,10 +1,12 @@
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router";
+
 interface Product {
   id: number;
   name: string;
   price: number;
   image: string;
+  path: string;
 }
 
 interface CategoryPageProps {
@@ -35,9 +37,11 @@ export default function CategoryPage({
           <div className="px-4 py-6 sm:px-0">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {products.map((product) => (
-                <div
+                <Link
+                  to={`/${product.path}-page`}
+                  state={{ id: product.id }}
                   key={product.id}
-                  className="bg-white p-5 flex flex-col justify-between overflow-hidden shadow rounded-lg"
+                  className="bg-white p-5  overflow-hidden shadow rounded-lg"
                 >
                   <div className="flex items-center justify-center  rounded-md">
                     <img
@@ -54,7 +58,7 @@ export default function CategoryPage({
                       {product.price} ₽
                     </p>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
